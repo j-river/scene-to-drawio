@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn structured scene JSON into editable Draw.io diagrams. Preview the layout and download XML locally in your browser.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Scene to Draw.io — JSON diagram playground</title>
+  <link rel="stylesheet" href="./assets/style.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://editableimage.com/" target="_blank" rel="noopener noreferrer"><span class="brand-mark" aria-hidden="true">E</span> EditableImage <span class="lab">/ open-source lab</span></a>
+    <nav aria-label="Project links"><a href="https://github.com/j-river/scene-to-drawio" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://editableimage.com/image-to-drawio" target="_blank" rel="noopener noreferrer">Image to Draw.io ↗</a></nav>
+  </header>
+  <main>
+    <div class="intro"><p class="eyebrow">JSON IN. EDITABLE DIAGRAM OUT.</p><h1>Scene to Draw.io</h1><p class="lede">Give your structured scene a file you can keep editing. Native shapes, real text, and connectors that stay attached.</p><p class="privacy"><span aria-hidden="true">●</span> Conversion runs in your browser. Your scene is not uploaded.</p></div>
+    <div class="workspace">
+      <section class="panel input-panel" aria-labelledby="input-title">
+        <div class="panel-heading"><div><p class="step">01 / INPUT</p><h2 id="input-title">Describe the scene</h2></div><button id="format" class="quiet" type="button">Format JSON</button></div>
+        <label for="sample">Start with an example</label>
+        <div class="sample-row"><select id="sample"><option value="flow">Simple workflow</option><option value="decision">Decision branches</option><option value="waypoints">Routed connectors</option><option value="floating">Floating endpoints</option></select><button id="load" class="quiet" type="button">Load example</button></div>
+        <p class="hint">Loading an example replaces the JSON below. Coordinates are in pixels.</p>
+        <label for="input">Scene JSON</label>
+        <textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="limits"></textarea>
+        <p id="limits" class="hint">Up to 2 MiB of JSON · 2,000 elements · 4 MiB of XML</p>
+        <div class="export-settings"><label for="mode">Export format</label><select id="mode"><option value="file">Draw.io file (.drawio)</option><option value="model">Graph model (.xml)</option></select></div>
+        <button id="generate" class="primary" type="button">Generate diagram <span aria-hidden="true">→</span></button>
+      </section>
+      <section class="panel result-panel" aria-labelledby="result-title">
+        <div class="panel-heading"><div><p class="step">02 / OUTPUT</p><h2 id="result-title">Make it editable</h2></div><span id="badge" class="badge">Ready</span></div>
+        <div class="preview" id="preview" aria-label="Schematic layout preview"></div>
+        <p class="hint preview-note">Schematic preview. Routing, text wrapping and fonts may differ in Draw.io. The export preserves full labels and geometry.</p>
+        <p id="stats" class="stats"></p>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div class="output-actions"><button id="download" class="primary" type="button" disabled>Download .drawio</button><button id="copy" class="quiet" type="button" disabled>Copy XML</button></div>
+        <details><summary>Inspect generated XML</summary><label for="output">Draw.io XML</label><textarea id="output" readonly spellcheck="false"></textarea></details>
+      </section>
+    </div>
+    <section class="guide" aria-labelledby="guide-title"><div><p class="eyebrow">KEEP WORKING IN YOUR EDITOR</p><h2 id="guide-title">A file, then a fully editable diagram.</h2><p>Download the <code>.drawio</code> file, then use <strong>File → Open From → Device</strong> in <a href="https://app.diagrams.net/" target="_blank" rel="noopener noreferrer">Draw.io ↗</a>. Move a node to check its attached connectors. For a bare graph model, use <strong>Extras → Edit Diagram</strong> in the editor.</p></div><div><h3>Already have an image?</h3><p>This tool starts with JSON. For image-to-editable-file workflows, explore <a href="https://editableimage.com/image-to-drawio" target="_blank" rel="noopener noreferrer">EditableImage</a>.</p><p class="hint">No image recognition or automatic layout is performed here. Custom HTML, images and arbitrary styles are not supported.</p></div></section>
+  </main>
+  <footer><span>scene-to-drawio · MIT licensed</span><a href="https://github.com/j-river/scene-to-drawio#scene-format" target="_blank" rel="noopener noreferrer">Scene format & source ↗</a><span>App code has no analytics or scene storage. Hosting providers may log page requests.</span></footer>
+</body>
+</html>

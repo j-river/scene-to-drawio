@@ -27,6 +27,9 @@
     "check": "npm run build && npm run typecheck && npm test",
     "test:package": "node scripts/test-package.mjs",
     "demo": "node scripts/serve-demo.mjs",
+    "build:space": "tsc -p space/tsconfig.json && node scripts/build-space.mjs",
+    "demo:space": "node scripts/serve-space.mjs",
+    "test:space": "npm run build:space && node scripts/test-space.mjs",
     "prepack": "npm run build"
   },
   "devDependencies": { "@types/node": "24.10.0", "@xmldom/xmldom": "0.9.12", "esbuild": "0.28.2", "typescript": "5.9.3" },

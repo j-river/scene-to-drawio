@@ -7,6 +7,25 @@ a rendering engine or an image-recognition model. No runtime dependencies.
 Try the [ready-made synthetic diagram](examples/scene.drawio) or inspect its
 [scene JSON](examples/scene.json).
 
+## Browser playground
+
+Try the [live Hugging Face demo](https://huggingface.co/spaces/j-river/scene-to-drawio).
+
+The [static playground source](space/) includes four examples, a schematic SVG
+preview, XML inspection and file downloads. Conversion stays in browser memory;
+the app has no scene uploads, analytics, storage or remote runtime scripts.
+
+```sh
+npm ci --ignore-scripts
+npm run build:space
+npm run demo:space
+```
+
+Open the printed localhost URL. For a Hugging Face Static Space, upload only the
+six public files inside `.artifacts/hf-space/`, preserving the `assets/` folder.
+See the [Space card](space/README.md) for the deployment steps and preview limits.
+The preview is schematic; inspect the exported file in Draw.io for final rendering.
+
 Need to recover a scene from an image first? [EditableImage](https://editableimage.com/)
 provides image-to-editable-file workflows, including
 [image to Draw.io](https://editableimage.com/image-to-drawio).
