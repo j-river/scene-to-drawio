@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.artifacts/
+*.tgz
+*.log
+.env*
+.npmrc
+.dev.vars*
+coverage/
+private-reference/

@@ -1,0 +1,17 @@
+{
+  "width": 960,
+  "height": 540,
+  "nodes": [
+    { "id": "input", "x": 70, "y": 190, "width": 180, "height": 90, "label": "Input / 输入", "shape": "rounded-rectangle", "fill": "#e8f0fe" },
+    { "id": "process", "x": 380, "y": 190, "width": 180, "height": 90, "label": "Editable nodes\n& bound connectors", "fill": "#172b25", "bold": true },
+    { "id": "output", "x": 690, "y": 190, "width": 180, "height": 90, "label": "Draw.io file", "shape": "cylinder", "fill": "#e5f5e9" }
+  ],
+  "edges": [
+    { "id": "first", "source": "input", "target": "process", "label": "JSON scene" },
+    { "id": "second", "source": "process", "target": "output", "label": "Editable XML" }
+  ],
+  "texts": [
+    { "id": "title", "x": 70, "y": 70, "width": 800, "height": 50, "text": "Structured scene → editable diagram", "fontSize": 28, "bold": true },
+    { "id": "note", "x": 70, "y": 380, "width": 800, "height": 50, "text": "Move a node in Draw.io: its connectors stay attached.", "fontSize": 16 }
+  ]
+}

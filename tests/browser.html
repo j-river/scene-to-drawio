@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Scene exporter browser checks</title>
+<h1>Browser checks</h1><pre id="results">Running…</pre>
+<script type="module">
+import {toDrawioXml,toDrawioModel,validateScene} from '../dist/browser.js';
+const sample=await(await fetch('../examples/scene.json')).json();
+const results=[];const check=(name,fn)=>{try{if(!fn())throw Error('Assertion failed');results.push({name,passed:true});}catch(error){results.push({name,passed:false,error:error.message});}};
+const parse=xml=>new DOMParser().parseFromString(xml,'application/xml');
+check('portable module generates valid XML',()=>!parse(toDrawioXml(sample)).querySelector('parsererror'));
+check('native edge binds both nodes',()=>{const edge=parse(toDrawioXml(sample)).querySelector('mxCell[edge="1"]');return edge.getAttribute('source')==='cell_input'&&edge.getAttribute('target')==='cell_process';});
+check('Unicode survives XML parsing',()=>parse(toDrawioXml(sample)).querySelector('#cell_input').getAttribute('value').includes('输入'));
+check('labels remain text after both XML and HTML decoding',()=>{const scene=structuredClone(sample);scene.nodes[0].label='<script>not code</'+'script> & text\nnext';const value=parse(toDrawioXml(scene)).querySelector('#cell_input').getAttribute('value');const label=new DOMParser().parseFromString(value,'text/html');return label.querySelectorAll('script').length===0&&label.body.textContent.includes('<script>not code</'+'script> & text')&&!!label.querySelector('br');});
+check('bare model has the expected root',()=>parse(toDrawioModel(sample)).documentElement.tagName==='mxGraphModel');
+check('validation returns a copy',()=>{const result=validateScene(sample);result.nodes[0].x=999;return sample.nodes[0].x===70;});
+check('style injection is rejected',()=>{const s=structuredClone(sample);s.nodes[0].fill='#fff;image=bad';try{toDrawioXml(s);return false;}catch{return true;}});
+document.querySelector('#results').textContent=JSON.stringify({passed:results.filter(r=>r.passed).length,total:results.length,results},null,2);
+document.title=`${results.every(r=>r.passed)?'PASS':'FAIL'} — browser checks`;
+</script></html>
